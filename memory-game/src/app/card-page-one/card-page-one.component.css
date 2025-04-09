@@ -1,0 +1,34 @@
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 10px;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  .card {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .card-content {
+    display: none;
+  }
+  
+  .card.flipped .card-content {
+    display: block;
+  }
+  
+  .card:not(.flipped) .card-content {
+    display: none;
+  }

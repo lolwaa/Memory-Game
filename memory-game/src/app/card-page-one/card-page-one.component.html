@@ -1,0 +1,10 @@
+
+<div class="grid-container">
+    <div *ngFor="let card of cards; let i = index" class="card" [class.flipped]="card.flipped"(click)="flipCard(i)">
+      <div class="card-content">
+        <span *ngIf="card.flipped">{{ card.value }}</span>
+        <span *ngIf="!card.flipped">?</span>
+      </div>
+    </div>
+  </div>
+
