@@ -2,9 +2,17 @@
 <div class="grid-container">
     <div *ngFor="let card of cards; let i = index" class="card" [class.flipped]="card.flipped"(click)="flipCard(i)">
       <div class="card-content">
-        <span *ngIf="card.flipped">{{ card.value }}</span>
+        <img *ngIf="card.flipped" [src]="card.image"/>
+        <!-- <span *ngIf="card.flipped">{{ card.image }}</span> -->
         <span *ngIf="!card.flipped">?</span>
       </div>
     </div>
+  </div>
+
+  <div class = "game-info">
+    <p>Attempts: {{attempts}} / 2 </p>
+    <button *ngIf="isGameOver || isGameWon" (click)="restartGame()"> Restart</button>
+
+
   </div>
 

@@ -2,6 +2,12 @@
 
 <router-outlet />
 <app-header></app-header>
- <!-- <app-home-page></app-home-page>  -->
- <app-card-page-one></app-card-page-one>
+<div *ngIf="currentView ==='home'">
+    <app-home-page (navigate)="switchView($event)"></app-home-page>
+</div>
+<div *ngIf="currentView ==='card'">
+    <app-card-page-one></app-card-page-one>
+</div>
+
+
 

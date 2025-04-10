@@ -10,18 +10,20 @@ import { Component } from '@angular/core';
 })
 export class CardPageOneComponent {
   cards = [
-    { value: 1, flipped: false },
-    { value: 2, flipped: false },
-    { value: 1, flipped: false },
-    { value: 2, flipped: false },
-    { value: 3, flipped: false },
-    { value: 4, flipped: false },
-    { value: 3, flipped: false },
-    { value: 4, flipped: false }
+    { image: 'assets/icons8-avocado-64.png', flipped: false },
+    { image: 'assets/icons8-blueberry-64.png', flipped: false },
+    { image: 'assets/icons8-avocado-64.png', flipped: false },
+    { image: 'assets/icons8-blueberry-64.png', flipped: false },
+    { image: 'assets/icons8-ice-cream-cone-64.png', flipped: false },
+    { image: 'assets/icons8-kawaii-pizza-64.png', flipped: false },
+    { image: 'assets/icons8-ice-cream-cone-64.png', flipped: false },
+    { image: 'assets/icons8-kawaii-pizza-64.png', flipped: false }
   ];
 
   flippedCards: number[] = [];
   isGameWon = false;
+  isGameOver = false;
+  attempts = 0;
   constructor() {
     this.shuffleCards();
   }
@@ -29,15 +31,16 @@ export class CardPageOneComponent {
   shuffleCards() {
     for (let i = this.cards.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]]; // Swap elements
+      [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]]; 
     }
   }
 
   flipCard(index: number): void {
+    if (this.isGameOver || this.cards[index].flipped) return;
     const card = this.cards[index];
 
 
-    if (card.flipped) return;
+    // if (card.flipped) return;
 
     card.flipped = true;
     this.flippedCards.push(index);
@@ -47,17 +50,24 @@ export class CardPageOneComponent {
       const firstCard = this.cards[firstIndex];
       const secondCard = this.cards[secondIndex];
 
-      if (firstCard.value !== secondCard.value) {
+      if (firstCard.image !== secondCard.image) {
+        this.attempts++;
         setTimeout(() => {
           this.cards[firstIndex].flipped = false;
           this.cards[secondIndex].flipped = false;
           this.flippedCards = [];
+
+          if (this.attempts >= 2){
+            this.isGameOver = true
+            alert("Sorry! You Lost Try Again")
+          }
         }, 1000);
       } else{
 
       this.flippedCards = [];
+      this.checkWin();
     }
-    this.checkWin();
+    
   }
 
 }
@@ -68,5 +78,16 @@ checkWin() {
       alert("Congratulations! You've won the game!");
     }, 500);
   }
+
+
+  
+}
+restartGame(){
+  this.cards.forEach(card=> card.flipped = false)
+  this.shuffleCards()
+  this.attempts =0;
+  this.flippedCards = [];
+  this.isGameOver = false;
+  this.isGameWon = false;
 }
 }

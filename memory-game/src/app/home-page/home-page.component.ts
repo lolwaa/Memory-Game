@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CardPageOneComponent } from '../card-page-one/card-page-one.component';
-import { Router } from '@angular/router';
 import { FormsModule,NgForm } from '@angular/forms';
 import { NgIf } from '@angular/common';
 ;
@@ -13,12 +12,10 @@ import { NgIf } from '@angular/common';
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent {
-  constructor(private router: Router) {}
-  CardPageOneComponent = false;
-  toggleComponent(){
-    this.CardPageOneComponent = this.CardPageOneComponent;
+  @Output() navigate = new EventEmitter<string>();
+
+  goToCardPage(){
+    this.navigate.emit('card');
   }
-
-
-
+ 
 }
