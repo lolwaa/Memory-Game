@@ -61,7 +61,7 @@ export class CardPageOneComponent {
             this.isGameOver = true
             alert("Sorry! You Lost Try Again")
           }
-        }, 1000);
+        }, 500);
       } else{
 
       this.flippedCards = [];
